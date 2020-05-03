@@ -46,6 +46,14 @@ public class CrossRace {
     public static void main(String[] args) {
         CrossRace crossRace = new CrossRace(5, 10);
         crossRace.startRace();
+
+        for (Thread motorBike : crossRace.motorBikes) {
+            try {
+                motorBike.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

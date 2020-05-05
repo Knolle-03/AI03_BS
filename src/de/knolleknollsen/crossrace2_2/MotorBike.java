@@ -17,19 +17,23 @@ public class MotorBike extends Thread {
 
     @Override
     public void run() {
-        for (int i = 0; i < rounds ; i++) {
-//            if (interrupted()){
-//                System.out.println("Motorad " + number + " aborted the race.");
-//                return;
-//            }
+        int i;
+        for (i = 0; i < rounds && !this.isInterrupted(); i++) {
+
             try {
                 int roundTime = rng.nextInt(100);
                 Thread.sleep(roundTime);
                 totalTime += roundTime;
             } catch (InterruptedException e) {
-                System.out.println("Motorad " + number + " stopped.");
-                return;
+                interrupt();
             }
+        }
+
+        if (isInterrupted()) {
+            System.err.println("Bike: " + number + " stopped in round " + i + " after " + totalTime + " ms because of an accident.");
+
+        } else {
+            System.out.println("Bike: " + number + " finished after: " + totalTime + " ms.");
         }
     }
 

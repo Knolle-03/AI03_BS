@@ -22,9 +22,12 @@ public class CrossRace {
             motorBikes[i].start();
         }
 
-        boolean allFinished = false;
 
-        while (!allFinished) {
+
+
+        boolean allFinished;
+
+        do {
             allFinished = true;
             for (Thread thread : motorBikes) {
                 if (thread.isAlive()) {
@@ -32,7 +35,20 @@ public class CrossRace {
                     break;
                 }
             }
-        }
+        } while (!allFinished);
+
+
+//        boolean allFinished = false;
+//
+//        while (!allFinished) {
+//            allFinished = true;
+//            for (Thread thread : motorBikes) {
+//                if (thread.isAlive()) {
+//                    allFinished = false;
+//                    break;
+//                }
+//            }
+//        }
 
         Arrays.sort(motorBikes, Comparator.comparingInt(MotorBike::getTotalTime));
         System.out.println("**** Endstand ****");

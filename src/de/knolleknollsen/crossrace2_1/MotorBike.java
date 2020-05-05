@@ -23,7 +23,7 @@ public class MotorBike extends Thread {
                 Thread.sleep(roundTime);
                 totalTime += roundTime;
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                // passiert nichts
             }
         }
     }
